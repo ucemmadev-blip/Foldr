@@ -59,9 +59,13 @@ export function AppSidebar() {
                       <Link to="/audio">Audio</Link>
                     </SidebarMenuSubItem>
 
-                    <SidebarMenuSubItem>Docunent</SidebarMenuSubItem>
+                    <SidebarMenuSubItem>
+                      <Link to="/docs">Docunent</Link>
+                    </SidebarMenuSubItem>
 
-                    <SidebarMenuSubItem>Videos</SidebarMenuSubItem>
+                    <SidebarMenuSubItem>
+                      <Link to="/vids">Videos</Link>
+                    </SidebarMenuSubItem>
                   </SidebarMenuSub>
                 </CollapsibleContent>
               </SidebarMenuItem>

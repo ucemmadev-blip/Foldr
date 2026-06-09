@@ -1,4 +1,4 @@
-import Layout from "../components/Layout/Layout";
+import Layout from "../components/layout/Layout";
 import { RecentFiles } from "@/components/dashboard/RecentFiles";
 import { StorageSummary } from "@/components/dashboard/StorageSummary";
 import { StorageOverview } from "@/components/dashboard/StorageOverview";
