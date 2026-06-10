@@ -4,13 +4,13 @@ import { Upload } from "lucide-react";
 
 import { Button } from "../../../@/components/ui/button";
 import { Progress } from "../../../@/components/ui/progress";
+import { useUpload } from "./useUpload";
 
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "../../../@/components/ui/dialog";
 
 interface UploadModalProps {
@@ -19,37 +19,13 @@ interface UploadModalProps {
 }
 
 export const UploadModal = ({ open, onOpenChange }: UploadModalProps) => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [progress, setProgress] = useState(0);
-  const [isUploading, setIsUploading] = useState(false);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-
-    if (file) {
-      setSelectedFile(file);
-      setProgress(0);
-    }
-  };
-
-  const handleUpload = () => {
-    if (!selectedFile) return;
-
-    setIsUploading(true);
-
-    let value = 0;
-
-    const interval = setInterval(() => {
-      value += 10;
-
-      setProgress(value);
-
-      if (value >= 100) {
-        clearInterval(interval);
-        setIsUploading(false);
-      }
-    }, 300);
-  };
+  const {
+  selectedFile,
+  progress,
+  isUploading,
+  handleFileChange,
+  handleUpload,
+} = useUpload();
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

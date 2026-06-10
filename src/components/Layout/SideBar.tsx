@@ -54,7 +54,6 @@ export function AppSidebar() {
                       <Link to="/photos">Photos</Link>
                     </SidebarMenuSubItem>
 
-
                     <SidebarMenuSubItem>
                       <Link to="/audio">Audio</Link>
                     </SidebarMenuSubItem>
@@ -74,14 +73,18 @@ export function AppSidebar() {
             <SidebarMenuItem>
               <SidebarMenuButton>
                 <Star />
-                <span>Favorites</span>
+                <Link to="/favorites">
+                  <span>Favorites</span>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
 
             <SidebarMenuItem>
               <SidebarMenuButton>
                 <Trash2 />
-                <span>Trash</span>
+                <Link to="/trash">
+                  <span>Trash</span>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>

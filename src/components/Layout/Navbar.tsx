@@ -3,7 +3,7 @@ import { BellDot, CircleUserRound, FileCheck, Settings } from "lucide-react";
 export const Navbar = () => {
   return (
     <>
-      <nav className="flex items-center justify-between w-full border-b px-6 py-4">
+      <nav className="sticky top-0 z-50 flex items-center justify-between w-full bg-white border-b px-6 py-4">
         <input
           type="text"
           placeholder="Search anything..."

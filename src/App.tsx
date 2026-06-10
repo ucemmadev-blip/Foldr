@@ -4,6 +4,8 @@ import { PhotoSection } from "./pages/PhotoPage";
 import { AudioPage } from "./pages/AudioPage";
 import { DocumentPage } from "./pages/DocumentPage";
 import { VideoPage } from "./pages/VideoPage";
+import { Favorites } from "./pages/Favorites";
+import { Trash } from "./pages/Trash";
 
 function App() {
   return (
@@ -14,7 +16,8 @@ function App() {
         <Route path="/audio" element={<AudioPage />} />
         <Route path="/docs" element={<DocumentPage />} />
         <Route path="/vids" element={<VideoPage />} />
-
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/trash" element={<Trash />} />
       </Routes>
     </>
   );
