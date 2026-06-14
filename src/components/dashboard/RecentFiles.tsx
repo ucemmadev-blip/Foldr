@@ -1,8 +1,13 @@
 import { Filter } from "lucide-react";
 import { Card, CardAction, CardHeader, CardContent } from "../../../@/components/ui/card";
 import { ContentCard } from "./ContentCard";
+import type { FileRecord } from "@/types/file";
 
-export const RecentFiles = () => {
+interface RecentFilesProps {
+  files: FileRecord[];
+}
+
+export const RecentFiles = ({files}: RecentFilesProps) => {
   return (
     <>
       <Card className="mt-5 mx-10">
@@ -16,7 +21,7 @@ export const RecentFiles = () => {
         </CardHeader>
 
         <CardContent>
-          <ContentCard />
+          <ContentCard files={files}/>
         </CardContent>
       </Card>
     </>

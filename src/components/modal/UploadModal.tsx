@@ -1,5 +1,3 @@
-
-
 import { Upload } from "lucide-react";
 
 import { Button } from "../../../@/components/ui/button";
@@ -16,16 +14,29 @@ import {
 interface UploadModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  onUploadSuccess: () => void;
 }
 
-export const UploadModal = ({ open, onOpenChange }: UploadModalProps) => {
+export const UploadModal = ({
+  open,
+  onOpenChange,
+  onUploadSuccess,
+}: UploadModalProps) => {
   const {
-  selectedFile,
-  progress,
-  isUploading,
-  handleFileChange,
-  handleUpload,
-} = useUpload();
+    selectedFile,
+    progress,
+    isUploading,
+    handleFileChange,
+    handleUpload,
+  } = useUpload(onUploadSuccess);
+
+  const handleUploadAndClose = async () => {
+    const success = await handleUpload();
+
+    if (success) {
+      onOpenChange(false)
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -73,7 +84,10 @@ export const UploadModal = ({ open, onOpenChange }: UploadModalProps) => {
           </div>
         )}
 
-        <Button onClick={handleUpload} disabled={!selectedFile || isUploading}>
+        <Button
+          onClick={handleUploadAndClose}
+          disabled={!selectedFile || isUploading}
+        >
           {isUploading ? "Uploading..." : "Upload"}
         </Button>
       </DialogContent>

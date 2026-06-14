@@ -4,8 +4,16 @@ import { Card, CardContent, CardHeader } from "../../../@/components/ui/card";
 import { UploadModal } from "../modal/UploadModal";
 import { useState } from "react";
 
-export const LargeFiles = () => {
-  const [open, setOpen] = useState(false)
+interface LargeFilesProps {
+  onUploadSuccess: () => void;
+}
+
+export const LargeFiles = ({
+  onUploadSuccess,
+}: LargeFilesProps) => {
+
+  const [open, setOpen] = useState(false);
+
   const largeData = [
     { name: "To.mp4", size: "2GB" },
     { name: "YT.mp4", size: "400MB" },
@@ -32,11 +40,11 @@ export const LargeFiles = () => {
       </Card>
 
       <div className="flex justify-center">
-        <Button className="p-5 " onClick={()=> setOpen(true)}>
+        <Button className="p-5 " onClick={() => setOpen(true)}>
           <Plus />
           Add New
         </Button>
-        <UploadModal open={open} onOpenChange={setOpen} />
+        <UploadModal open={open} onOpenChange={setOpen} onUploadSuccess={onUploadSuccess}/>
       </div>
     </>
   );

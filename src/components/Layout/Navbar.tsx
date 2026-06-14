@@ -7,7 +7,7 @@ export const Navbar = () => {
         <input
           type="text"
           placeholder="Search anything..."
-          className="border rounded-2xl px-3 py-2 w-80 bg-gray-100 ring-gray-400 text-gray-600"
+          className="border rounded-2xl px-3 py-2 w-250 bg-gray-100 ring-gray-400 text-gray-600"
         />
 
         <div className="flex items-center gap-5">
@@ -20,3 +20,7 @@ export const Navbar = () => {
     </>
   );
 };
+
+// EasyNoteENTE69AP.
+// Project URLL: https://siprwhfdbdisoctxilmd.supabase.co
+// Publishable key: sb_publishable_m2GmYA2fkV_kwcVicEzdrw_RKh52cV4
