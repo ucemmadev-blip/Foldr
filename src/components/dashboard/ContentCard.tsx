@@ -28,32 +28,48 @@ export const ContentCard = ({ files }: ContentCardProps) => {
     return data.publicUrl;
   };
 
-  console.log(files);
-
   return (
     <div className="grid grid-cols-3 gap-5">
       {files.map((file) => (
-        <Card key={file.id}>
-          <CardHeader>{file.name}</CardHeader>
-
-          <CardContent>
+        <Card
+          key={file.id}
+          className="overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1"
+        >
+          <CardContent className="p-0">
             <FilePreview fileUrl={getFileUrl(file.path)} fileType={file.type} />
           </CardContent>
 
-          <CardFooter>
-            <div className="flex justify-around w-full">
-              <p>
-                {new Date(file.created_at).toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                })}
-              </p>
+          <div className="p-4">
+            <h3 className="font-medium truncate">{file.name}</h3>
 
-              <div className="flex gap-2">
-                <Share2 size={20} />
-                <Trash2 size={20} />
-                <Heart size={20} />
-              </div>
+            <p className="text-sm text-muted-foreground">
+              {(file.size / 1024).toFixed(1)} KB
+            </p>
+          </div>
+
+          <CardFooter className="flex justify-between items-center">
+            <p className="text-sm text-muted-foreground">
+              {new Date(file.created_at).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+              })}
+            </p>
+
+            <div className="flex gap-3">
+              <Share2
+                size={18}
+                className="cursor-pointer hover:scale-110 transition"
+              />
+
+              <Trash2
+                size={18}
+                className="cursor-pointer hover:scale-110 transition"
+              />
+
+              <Heart
+                size={18}
+                className="cursor-pointer hover:scale-110 transition"
+              />
             </div>
           </CardFooter>
         </Card>
