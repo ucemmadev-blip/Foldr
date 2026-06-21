@@ -54,15 +54,15 @@ export function AppSidebar() {
                       <Link to="/photos">Photos</Link>
                     </SidebarMenuSubItem>
 
-                    <SidebarMenuSubItem>
+                    <SidebarMenuSubItem className="text-sm">
                       <Link to="/audio">Audio</Link>
                     </SidebarMenuSubItem>
 
-                    <SidebarMenuSubItem>
+                    <SidebarMenuSubItem className="text-sm">
                       <Link to="/docs">Docunent</Link>
                     </SidebarMenuSubItem>
 
-                    <SidebarMenuSubItem>
+                    <SidebarMenuSubItem className="text-sm">
                       <Link to="/vids">Videos</Link>
                     </SidebarMenuSubItem>
                   </SidebarMenuSub>

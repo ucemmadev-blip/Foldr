@@ -1,102 +1,31 @@
 import { Button } from "../../../@/components/ui/button";
 import { Card, CardContent, CardFooter } from "../../../@/components/ui/card";
 import { LayoutDashboard } from "lucide-react";
+import { useState, useEffect } from "react";
+import { getPhotos } from "@/services/fileService";
+import type { FileRecord } from "@/types/file";
+import { supabase } from "@/lib/supabase";
 
-interface PhotoItem {
-  id: string;
-  title: string;
-  image: string;
-  size: string;
-  date: Date;
-}
+import { Dialog, DialogContent } from "../../../@/components/ui/dialog";
 
 export const PhotoOverview = () => {
-  const photos: PhotoItem[] = [
-    {
-      id: "1",
-      title: "Beach Sunset",
-      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-      size: "2.4 MB",
-      date: new Date("2026-05-12"),
-    },
-    {
-      id: "2",
-      title: "Mountain View",
-      image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b",
-      size: "3.1 MB",
-      date: new Date("2026-05-15"),
-    },
-    {
-      id: "3",
-      title: "City Lights",
-      image: "https://images.unsplash.com/photo-1519501025264-65ba15a82390",
-      size: "4.7 MB",
-      date: new Date("2026-05-18"),
-    },
-    {
-      id: "4",
-      title: "Forest Trail",
-      image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e",
-      size: "1.9 MB",
-      date: new Date("2026-05-21"),
-    },
-    {
-      id: "5",
-      title: "Desert Dunes",
-      image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-      size: "2.8 MB",
-      date: new Date("2026-05-24"),
-    },
-    {
-      id: "6",
-      title: "Snowy Peaks",
-      image: "https://images.unsplash.com/photo-1454496522488-7a8e488e8606",
-      size: "5.2 MB",
-      date: new Date("2026-05-27"),
-    },
-        {
-      id: "1",
-      title: "Beach Sunset",
-      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-      size: "2.4 MB",
-      date: new Date("2026-05-12"),
-    },
-    {
-      id: "2",
-      title: "Mountain View",
-      image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b",
-      size: "3.1 MB",
-      date: new Date("2026-05-15"),
-    },
-    {
-      id: "3",
-      title: "City Lights",
-      image: "https://images.unsplash.com/photo-1519501025264-65ba15a82390",
-      size: "4.7 MB",
-      date: new Date("2026-05-18"),
-    },
-    {
-      id: "4",
-      title: "Forest Trail",
-      image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e",
-      size: "1.9 MB",
-      date: new Date("2026-05-21"),
-    },
-    {
-      id: "5",
-      title: "Desert Dunes",
-      image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-      size: "2.8 MB",
-      date: new Date("2026-05-24"),
-    },
-    {
-      id: "6",
-      title: "Snowy Peaks",
-      image: "https://images.unsplash.com/photo-1454496522488-7a8e488e8606",
-      size: "5.2 MB",
-      date: new Date("2026-05-27"),
-    },
-  ];
+  const [photos, setPhotos] = useState<FileRecord[]>([]);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadPhotos = async () => {
+      const data = await getPhotos();
+      setPhotos(data);
+    };
+
+    loadPhotos();
+  }, []);
+
+  const getFileUrl = (path: string) => {
+    const { data } = supabase.storage.from("files").getPublicUrl(path);
+
+    return data.publicUrl;
+  };
 
   return (
     <>
@@ -113,19 +42,35 @@ export const PhotoOverview = () => {
           <Card key={photo.id}>
             <CardContent>
               <img
-                src={photo.image}
-                alt={photo.title}
+                src={getFileUrl(photo.path)}
+                alt={photo.name}
                 className="h-48 w-full object-cover rounded-md"
+                onClick={() => setSelectedImage(getFileUrl(photo.path))}
               />
             </CardContent>
 
             <CardFooter className="flex justify-between">
-              <p>{photo.title}</p>
-              <p>{photo.size}</p>
+              <p className="truncate">{photo.name}</p>
+              <p>{(photo.size / 1024).toFixed(1)} KB</p>
             </CardFooter>
           </Card>
         ))}
       </div>
+
+      <Dialog
+        open={!!selectedImage}
+        onOpenChange={() => setSelectedImage(null)}
+      >
+        <DialogContent className="max-w-4xl">
+          {selectedImage && (
+            <img
+              src={selectedImage}
+              alt="Full Preview"
+              className="w-full h-auto rounded-md"
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
