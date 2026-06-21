@@ -22,7 +22,6 @@ export const DocumentOverview = () => {
   const [documents, setDocuments] = useState<FileRecord[]>([]);
   const [selectedDoc, setSelectedDoc] = useState<FileRecord | null>(null);
   const [excelData, setExcelData] = useState<any[]>([]);
-  const [docxContent, setDocxContent] = useState("");
 
   useEffect(() => {
     const loadDocuments = async () => {
